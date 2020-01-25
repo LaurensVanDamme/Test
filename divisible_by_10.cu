@@ -41,7 +41,7 @@ namespace DB10 {
 
 		// Input always has be to be a one dimensional array (If multidimension is needed, use structs)
 		// Size has to be a constant value
-		const int input_size = 1005;
+		const int input_size = 10000;
 		int input_array[input_size] = { 1, 2, 3, 10, 50, 45, 30, 100, 74, 30, 31 , 32 };
 		for (int i = 12; i < input_size; i++) {
 			if (i % 2 == 1)
@@ -54,13 +54,12 @@ namespace DB10 {
 		std::copy(input_array, input_array + input_size, input);
 
 		// Ouput always has be to be a one dimensional array (If multidimension is needed, use structs)
-		// Size has to be a constant value
 		int output_size = 4;
 		int* output_keys = (int*)malloc(output_size * sizeof(int));
 		int* output_values = (int*)malloc(output_size * sizeof(int));
 
 		// Max amount of key-value pairs that can be made by 1 input a.k.a. 1 execution of the mapper
-		const int amount_pairs_per_map = 2;
+		const int amount_pairs_per_map = 1;
 
 		// Print the input (optional)
 		printf("\nInput numbers: { ");
@@ -73,8 +72,8 @@ namespace DB10 {
 		output_size = MapReduce<int, int, int>(input, input_size, output_keys, output_values, output_size, amount_pairs_per_map, h_mapper, h_reducer);
 
 		// Print the output (optional)
-		printf("\n# numbers divisible by 10: %i\n", output_values[1]);  // index 0 are empty values, caused by the unused pairs
-		printf("\n# numbers not divisible by 10: %i\n\n", output_values[2]);
+		printf("\n# numbers divisible by 10: %i\n", output_values[0]);  // index 0 are empty values, caused by the unused pairs
+		printf("\n# numbers not divisible by 10: %i\n\n", output_values[1]);
 	}
 
 }  // End namespace DB10
